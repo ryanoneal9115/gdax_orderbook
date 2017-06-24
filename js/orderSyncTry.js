@@ -27,7 +27,6 @@ var OrderbookSync = function(productID, apiURI, websocketURI, authenticatedClien
 
   (function() {
       self.loadHistoricalData();
-      //setInterval(self.loadHistoricalData, 20000);
    })();
 };
 
@@ -90,7 +89,7 @@ _.assign(OrderbookSync.prototype, new function() {
     var yAxis = d3.axisLeft(y)
             .tickFormat(d3.format(",.3s"));
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#chart").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -140,7 +139,7 @@ _.assign(OrderbookSync.prototype, new function() {
                 .attr("y", 6)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Ichimoku");
+                .text("Ichimoku ($)");
 
         // Data to display initially
         draw(data.slice(0, data.length-20));
@@ -230,6 +229,10 @@ _.assign(OrderbookSync.prototype, new function() {
   prototype.loadHistoricalData = function() {
       var self = this;
       self.publicClient.getProductHistoricRates(self.populateHistoricalData);
+      setInterval(function() {
+            $('#chart').empty();
+          self.publicClient.getProductHistoricRates(self.populateHistoricalData);
+      }, 30000);
   }
 
   prototype.loadOrderbook = function() {

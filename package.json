@@ -1,0 +1,31 @@
+{
+  "name": "gdax_orderbook",
+  "version": "1.0.0",
+  "description": "An orderbook used to aid in crypto purchases",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+},
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.6.2"
+  },
+  "dependencies": {
+    "binary-search-tree": "^0.2.6",
+    "bootstrap": "^3.3.7",
+    "devtron": "^1.4.0",
+    "electron-reload": "^1.2.1",
+    "gdax": "^0.4.2",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "socket.io": "^2.0.3"
+  }
+}

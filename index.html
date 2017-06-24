@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+      <!-- Insert this line above script imports  -->
+      <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+      <!-- normal script imports etc  -->
+      <script src="js/jquery.min.js"></script>
+      <!-- <script src="scripts/vendor.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+      <!-- Insert this line after script imports -->
+      <script>if (window.module) module = window.module;</script>
+    <script src="js/analytics.js"></script>
+    <script src="js/orderSyncTry.js"></script>
+  </head>
+  <body>
+      <div class="container">
+
+          <div id="bid-div" class="row">
+              <div class="col-xs-4">
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <div class="input-group">
+                              <span class="input-group-addon">Column Height</span>
+                              <input type="text" class="form-control" placeholder="Default Height is 20" aria-describedby="basic-addon1"  id="asks-column-height">
+                          </div>
+                          <div class="input-group">
+                              <span class="input-group-addon">Columns</span>
+                              <select class="selectpicker form-control" id="askColumnAmount" disabled>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div id="askColumns">
+                          <div class="col-xs-12">
+                              <ul id="asks0" class="list-group"></ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xs-4">
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <form class="form-inline">
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <span class="input-group-addon">Column Height</span>
+                                      <input type="text" class="form-control" placeholder="Default Height is 20" aria-describedby="basic-addon1"  id="bids-column-height">
+                                  </div>
+                              </div>
+                              <div class="input-group">
+                                  <span class="input-group-addon">Currency</span>
+                                  <select class="selectpicker form-control" id="coinType">
+                                      <option value="eth">ETH</option>
+                                      <option value="ltc">LTC</option>
+                                      <option value="btc">BTC</option>
+                                  </select>
+                              </div>
+                              <div class="input-group">
+                                  <span class="input-group-addon">Columns</span>
+                                  <select class="selectpicker form-control" id="buyColumnAmount" disabled>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                  </select>
+                              </div
+                          </form>
+                      </div>
+                      <div id="buyColumns">
+                          <div class="col-xs-12">
+                              <ul id="bids0" class="list-group"></ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xs-4">
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <div class="input-group">
+                              <span class="input-group-addon">Column Height</span>
+                              <input type="text" class="form-control" placeholder="Default Height is 20" aria-describedby="basic-addon1"  id="trades-column-height">
+                          </div>
+                          <div class="input-group">
+                              <span class="input-group-addon">Columns</span>
+                              <select class="selectpicker form-control" id="tradeHistoryColumnAmount">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div id="tradeHistoryColumns">
+                          <div class="col-xs-12">
+                              <ul id="tradeHistory0" class="list-group"></ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>

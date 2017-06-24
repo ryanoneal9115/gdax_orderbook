@@ -158,23 +158,7 @@ function populateTradeHistory(data){
 		tradeHistory.shift();
 	}
 	tradeHistory.push(data);
-	$('#tradeHistory0').html('');
-	var start = 0;
-	for(var i = tradeHistory.length - 1; i > -1; i--){
-		if(start > maxTradeRowsPerColumn){
-			break;
-		}
-		size = Number(tradeHistory[i].size);
-		if(tradeHistory[i].side == 'buy'){
-			$('#tradeHistory0').append('<li class="list-group-item list-group-item-danger"><div class="row"><div class="col-xs-6 img-responsive">'
-				+ size.toFixed(5) + '</div><div class="col-xs-6 img-responsive">' + tradeHistory[i].price + '</div></div></li>');
-		}
-		else{
-			$('#tradeHistory0').append('<li class="list-group-item list-group-item-success"><div class="row"><div class="col-xs-6 img-responsive">'
-				+ size.toFixed(5) + '</div><div class="col-xs-6 img-responsive">' + tradeHistory[i].price + '</div></div></li>');
-		}
-		start++;
-	}
+	refreshTradeHistory();
 }
 
 function refreshTradeHistory(){
@@ -230,7 +214,7 @@ var maxBidColumns = 1;
 var maxAskColumns = 1;
 var maxTradeHistoryColumns = 1;
 
-function groupBids(){
+function populateBids(){
 	var bidColumn = 0;
     var bidRow = 0;
     var bidId = '#bids0';
@@ -259,8 +243,6 @@ function groupBids(){
 				// console.log(bidId);
 				$('#bids0').append('<li class="list-group-item list-group-item-success"><div class="row"><div class="col-xs-6 img-responsive">'
 					+ amountSum.toFixed(5) + '</div><div class="col-xs-6 img-responsive">' + Number(eachNode.orders[0].price.toString()) + '</div></div></li>');
-				// $(bidId).append('<li class="list-group-item list-group-item-success"><ul class="list-inline">div class="row"><div class="col-xs-6 img-responsive">'
-				// 	+ amountSum + '</div><div class="col-xs-6 img-responsive">' + Number(eachNode.orders[0].price.toString()) + '</div></div></li>');
 			}
 			bidRow++;
 		});
@@ -270,7 +252,7 @@ function groupBids(){
 	}
 }
 
-function groupAsks(){
+function populateAsks(){
 	var askColumn = 0;
     var askRow = 0;
     var askId = '#asks0';
@@ -297,14 +279,11 @@ function groupAsks(){
 				}
 				$('#asks0').append('<li class="list-group-item list-group-item-danger"><div class="row"><div class="col-xs-6 img-responsive">'
 					+ amountSum.toFixed(5) + '</div><div class="col-xs-6 img-responsive">' + Number(eachNode.orders[0].price.toString()) + '</div></div></li>');
-				// $(bidId).append('<li class="list-group-item list-group-item-success"><ul class="list-inline">div class="row"><div class="col-xs-6 img-responsive">'
-				// 	+ amountSum + '</div><div class="col-xs-6 img-responsive">' + Number(eachNode.orders[0].price.toString()) + '</div></div></li>');
 			}
 
 			askRow++;
 		});
 	} catch (e) {
-		// console.log(2);
 		//we are just catching the thing we threw above, but we dont need to do anything with it
 	}
 }
@@ -313,20 +292,18 @@ var maxBidRowsPerColumn = 20;
 var maxAskRowsPerColumn = 20;
 var maxTradeRowsPerColumn = 20;
 
-function callGroupBids(){
-	groupBids();
-	// console.log('bid');
-	setTimeout(callGroupBids, 500);
+function callPopulateBids(){
+	populateBids();
+	setTimeout(callPopulateBids, 500);
 }
 
-function callGroupAsks(){
-	groupAsks();
-	// console.log('ask');
-	setTimeout(callGroupAsks, 500);
+function callPopulateAsks(){
+	populateAsks();
+	setTimeout(callPopulateAsks, 500);
 }
 
-setTimeout(callGroupAsks, 500);
-setTimeout(callGroupBids, 500);
+setTimeout(callPopulateAsks, 500);
+setTimeout(callPopulateBids, 500);
 
 
 //listener to change the column height
@@ -359,40 +336,4 @@ $( document ).ready(function() {
 	    changeCurrency(this.value);
 	})
 
-	// $('#buyColumnAmount').on('change', function() {
-	//     changeColumnAmount('bids', 'buyColumns', this.value);
-	// })
-    //
-	// $('#askColumnAmount').on('change', function() {
-	//     changeColumnAmount('asks', 'askColumns', this.value);
-	// })
-
-	// $('#tradeHistoryColumnAmount').on('change', function() {
-	//     changeColumnAmount('trades', 'tradeHistoryColumns', this.value);
-	// })
-
 });
-
-//type is buy or sell, id is the wrapper div, columnAmount is the number of columns you want to see
-// function changeColumnAmount(type, id, columnAmount){
-// 	var columnSize = 12 / columnAmount;
-// 	var text = '';
-// 	var columnCounter = 0;
-//
-// 	for(var i = 0; i < columnAmount; i++){
-// 		text += '<div class="col-xs-' + columnSize + '"><ul id="' + type + columnCounter + '" class="list-group"></ul></div>'
-// 		columnCounter++;
-// 	}
-//
-// 	if(type == 'bids'){
-// 		maxBidColumns = columnAmount;
-// 	}
-// 	else if(type == 'asks'){
-// 		maxSellColumns = columnAmount;
-// 	}
-// 	else if(type == 'trades'){
-// 		maxTradeHistoryColumns = columnAmount;
-// 	}
-//
-// 	$('#' + id).html(text);
-// }
